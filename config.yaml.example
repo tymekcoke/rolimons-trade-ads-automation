@@ -1,0 +1,87 @@
+# ──────────────────────────────────────────────────────────
+# Rolimons Trade Ad Bot — Configuration
+# ──────────────────────────────────────────────────────────
+#
+# Fill in your details below, then rename this file to:
+#   config.yaml
+#
+# Or just run  python bot.py  and the setup wizard will
+# create this file for you automatically.
+# ──────────────────────────────────────────────────────────
+
+
+# Your Roblox User ID
+# (the number in your Roblox profile URL)
+user_id: 123456789
+
+
+# Your _RoliVerification cookie from rolimons.com
+#
+# How to get it:
+#   1. Log in to  https://www.rolimons.com
+#   2. Press F12  →  Application tab  →  Cookies (left panel)
+#      →  https://www.rolimons.com
+#   3. Find the row "_RoliVerification" and copy the Value column
+#
+# ⚠  Keep this secret — it gives access to post on your behalf.
+roli_verification: "paste_your_cookie_here"
+
+
+# ──────────────────────────────────────────────────────────
+# WHAT YOU'RE OFFERING
+# ──────────────────────────────────────────────────────────
+
+filters:
+
+  # AUTO MODE: minimum thresholds
+  # (only items that meet BOTH conditions will be offered)
+  min_rap:   1000    # Minimum Recent Average Price
+  min_value: 500     # Minimum Rolimons value  (0 = use RAP if no value)
+
+  filter_on_hold: true   # true = skip items currently on hold (can't be traded)
+
+  # Items to always skip (by asset ID)
+  # Example: [1365767, 1028595]
+  exclude_items: []
+
+  # MANUAL MODE: list specific item IDs to offer
+  # Leave empty ([]) to use AUTO mode (thresholds above)
+  # Example: [6803423284, 7212273948]
+  offer_item_ids: []
+
+
+# ──────────────────────────────────────────────────────────
+# WHAT YOU'RE LOOKING FOR
+# ──────────────────────────────────────────────────────────
+
+trade_ad:
+
+  # Tags that describe what you want
+  # Available: upgrade, downgrade, demand, projected, rare, any
+  request_tags:
+    - upgrade
+    - demand
+
+  # Specific items you want (optional, by asset ID)
+  # Example: [259425946, 1028595]
+  request_item_ids: []
+
+  # Set to true to preview without actually posting
+  dry_run: false
+
+
+# ──────────────────────────────────────────────────────────
+# AUTOMATION
+# ──────────────────────────────────────────────────────────
+
+automation:
+  interval_minutes: 15   # How often to post (minimum 15 — Rolimons enforces this)
+  run_once: false        # true = post once and exit, false = keep running
+
+
+# ──────────────────────────────────────────────────────────
+# LOGGING
+# ──────────────────────────────────────────────────────────
+
+logging:
+  level: INFO   # DEBUG / INFO / WARNING / ERROR
