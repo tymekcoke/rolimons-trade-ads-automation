@@ -146,10 +146,17 @@ async def fetch_roblox_inventory(user_id: int) -> list[dict]:
     raw_items = []
     cursor = None
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    async with httpx.AsyncClient(timeout=60.0) as client:
         while True:
             url = base_url if not cursor else f"{base_url}?cursor={cursor}"
-            resp = await client.get(url, headers=_build_headers())
+            for attempt in range(3):
+                try:
+                    resp = await client.get(url, headers=_build_headers())
+                    break
+                except httpx.ReadTimeout:
+                    if attempt == 2:
+                        raise
+                    await asyncio.sleep(5 * (attempt + 1))
 
             if resp.status_code == 403:
                 raise BotError(
